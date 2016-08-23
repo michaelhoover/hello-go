@@ -15,7 +15,7 @@ fi
 docker build -t $APP .
 
 # Save the image to a TAR file
-docker save $APP -o image.tar
+docker save -o image.tar $APP
 
 # Find the full git commit hash for the current commit
 COMMIT=$(git rev-parse HEAD)
