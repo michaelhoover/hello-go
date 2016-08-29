@@ -7,6 +7,14 @@ APP=${PWD##*/}
 
 DOCKER_UPLOAD_TOKEN="${1-}"
 if [ -z $DOCKER_UPLOAD_TOKEN ]; then
+    set +e
+    DOCKER_UPLOAD_TOKEN=`git config skyliner.artifact-token`
+    set -e
+fi
+
+if [ -z $DOCKER_UPLOAD_TOKEN ]; then
+    echo ""
+    echo "Usage: "
     echo "./upload.sh <docker upload token>"
     exit -1
 fi
