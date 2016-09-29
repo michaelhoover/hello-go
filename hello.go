@@ -18,6 +18,6 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("assets")))
 	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
 	if err := http.ListenAndServe(addr, Log(http.DefaultServeMux)); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
