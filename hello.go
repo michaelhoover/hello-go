@@ -19,9 +19,17 @@ func Log(handler http.Handler) http.Handler {
 	})
 }
 
+func getAddr() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	return fmt.Sprintf(":%s", port)
+}
+
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("assets")))
-	addr := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	addr := getAddr()
 	if err := http.ListenAndServe(addr, Log(http.DefaultServeMux)); err != nil {
 		log.Fatal(err)
 	}
