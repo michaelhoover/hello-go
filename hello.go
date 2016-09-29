@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+func init() {
+	// disable timestamps in the log format -- that's handled by syslog
+	log.SetFlags(0)
+}
+
 func Log(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
